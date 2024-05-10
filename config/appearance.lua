@@ -1,10 +1,11 @@
 local wezterm = require('wezterm')
 local gpu_adapters = require('utils.gpu_adapter')
 local colors = require('colors.custom')
+local fonts = require('config.fonts')
 
 return {
-   animation_fps = 60,
-   max_fps = 60,
+   animation_fps = 120,
+   max_fps = 120,
    front_end = 'WebGpu',
    webgpu_power_preference = 'HighPerformance',
    webgpu_preferred_adapter = gpu_adapters:pick_best(),
@@ -14,14 +15,14 @@ return {
 
    -- background
    background = {
-      {
-         source = { File = wezterm.GLOBAL.background },
-      },
+      -- {
+      --    source = { File = wezterm.GLOBAL.background },
+      -- },
       {
          source = { Color = colors.background },
          height = '100%',
          width = '100%',
-         opacity = 0.96,
+         opacity = 0.98,
       },
    },
 
@@ -47,7 +48,7 @@ return {
    window_frame = {
       active_titlebar_bg = '#090909',
       -- font = fonts.font,
-      -- font_size = fonts.font_size,
+      font_size = fonts.font_size,
    },
    inactive_pane_hsb = {
       saturation = 0.9,

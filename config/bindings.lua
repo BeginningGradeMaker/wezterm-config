@@ -151,6 +151,11 @@ local keys = {
          timemout_miliseconds = 1000,
       }),
    },
+   { mods = "OPT", key = "LeftArrow",  action = act.SendKey({ mods = "ALT", key = "b" }) },
+   { mods = "OPT", key = "RightArrow", action = act.SendKey({ mods = "ALT", key = "f" }) },
+   { mods = "CMD", key = "LeftArrow",  action = act.SendKey({ mods = "CTRL", key = "a" }) },
+   { mods = "CMD", key = "RightArrow", action = act.SendKey({ mods = "CTRL", key = "e" }) },
+   { mods = "CMD", key = "Backspace",  action = act.SendKey({ mods = "CTRL", key = "u" }) },
 }
 
 -- stylua: ignore
@@ -182,7 +187,7 @@ local mouse_bindings = {
 }
 
 return {
-   disable_default_key_bindings = true,
+   disable_default_key_bindings = false,
    leader = { key = 'Space', mods = mod.SUPER_REV },
    keys = keys,
    key_tables = key_tables,
