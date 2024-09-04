@@ -11,18 +11,19 @@ return {
    webgpu_preferred_adapter = gpu_adapters:pick_best(),
 
    -- color scheme
-   colors = colors,
+   -- colors = colors,
+   color_scheme = 'Tokyo Night Moon',
 
    -- background
    background = {
-      -- {
-      --    source = { File = wezterm.GLOBAL.background },
-      -- },
+      {
+         source = { File = wezterm.GLOBAL.background },
+      },
       {
          source = { Color = colors.background },
          height = '100%',
          width = '100%',
-         opacity = 0.98,
+         opacity = 0.97,
       },
    },
 
@@ -44,14 +45,14 @@ return {
       top = 12,
       bottom = 7,
    },
-   window_close_confirmation = 'NeverPrompt',
+   -- window_close_confirmation = 'NeverPrompt',
    window_frame = {
       active_titlebar_bg = '#090909',
-      -- font = fonts.font,
+      font = fonts.font,
       font_size = fonts.font_size,
    },
    inactive_pane_hsb = {
-      saturation = 0.9,
-      brightness = 0.65,
+      -- saturation = 0.9,
+      -- brightness = 0.65,
    },
 }

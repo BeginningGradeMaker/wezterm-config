@@ -1,6 +1,7 @@
 return {
    -- behaviours
    automatically_reload_config = true,
+   window_close_confirmation = 'AlwaysPrompt',
    exit_behavior = 'CloseOnCleanExit', -- if the shell program exited with a successful status
    status_update_interval = 1000,
    window_decorations = "RESIZE",
