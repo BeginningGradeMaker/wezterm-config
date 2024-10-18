@@ -89,6 +89,7 @@ local colorscheme = {
    },
    tab_bar = {
       background = 'rgba(0, 0, 0, 0.4)',
+      -- background = 'rgba(0, 0, 0)',
       active_tab = {
          bg_color = mocha.surface2,
          fg_color = mocha.text,

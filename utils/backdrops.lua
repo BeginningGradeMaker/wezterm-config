@@ -26,7 +26,7 @@ function BackDrops:init()
       files = {},
    }
    local backdrops = setmetatable(inital, self)
-   wezterm.GLOBAL.background = "/Users/zhisu/.config/wezterm/backdrops/neon.png"
+   wezterm.GLOBAL.background = '/Users/zhisu/.config/wezterm/backdrops/neon.png'
    return backdrops
 end
 
@@ -41,7 +41,7 @@ end
 function BackDrops:set_files()
    self.files = wezterm.read_dir(wezterm.config_dir .. PATH_SEP .. 'backdrops')
    -- wezterm.GLOBAL.background = self.files[1]
-   wezterm.GLOBAL.background = "/Users/zhisu/.config/wezterm/backdrops/neon.png"
+   wezterm.GLOBAL.background = '/Users/zhisu/.config/wezterm/backdrops/neon.png'
    return self
 end
 

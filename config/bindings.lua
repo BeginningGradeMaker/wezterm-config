@@ -8,16 +8,16 @@ local resurrect = wezterm.plugin.require('https://github.com/MLFlexer/resurrect.
 resurrect.periodic_save()
 local workspace_state = resurrect.workspace_state
 local workspace_switcher =
-    wezterm.plugin.require('https://github.com/MLFlexer/smart_workspace_switcher.wezterm')
+   wezterm.plugin.require('https://github.com/MLFlexer/smart_workspace_switcher.wezterm')
 
 local mod = {}
 
 if platform.is_mac then
-    mod.SUPER = 'SUPER'
-    mod.SUPER_REV = 'SUPER|CTRL'
+   mod.SUPER = 'SUPER'
+   mod.SUPER_REV = 'SUPER|CTRL'
 elseif platform.is_win or platform.is_linux then
-    mod.SUPER = 'ALT' -- to not conflict with Windows key shortcuts
-    mod.SUPER_REV = 'ALT|CTRL'
+   mod.SUPER = 'ALT' -- to not conflict with Windows key shortcuts
+   mod.SUPER_REV = 'ALT|CTRL'
 end
 
 -- stylua: ignore
@@ -175,54 +175,58 @@ local keys = {
         mods = 'CMD',
         action = wezterm.action.ActivateLastTab,
     },
-    { key = 'm', mods = 'CMD', action = wezterm.action.HideApplication },
-    {
-        key = "s",
-        mods = mod.SUPER_REV,
-        action = wezterm.action.Multiple({
-            wezterm.action_callback(function(win, pane)
-                resurrect.save_state(workspace_state.get_workspace_state(), pane.get_current_working_dir())
-            end),
-        }),
-    },
-    {
-        key = "l",
-        mods = mod.SUPER_REV,
-        action = wezterm.action.Multiple({
-            wezterm.action_callback(function(win, pane)
-                resurrect.fuzzy_load(win, pane, function(id, label)
-                    id = string.match(id, "([^/]+)$")
-                    id = string.match(id, "(.+)%..+$")
-                    local state = resurrect.load_state(id, "workspace")
-                    workspace_state.restore_workspace(state, {
-                        relative = true,
-                        restore_text = true,
-                        on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-                    })
-                end)
-            end),
-        }),
-    },
-    {
-        key = "s",
-        mods = mod.SUPER,
-        action = workspace_switcher.switch_workspace(),
-    },
+    { key = 'm',         mods = 'CMD',   action = wezterm.action.HideApplication },
+    -- {
+    --     key = "s",
+    --     mods = mod.SUPER_REV,
+    --     action = wezterm.action.Multiple({
+    --         wezterm.action_callback(function(win, pane)
+    --             resurrect.save_state(workspace_state.get_workspace_state(), pane.get_current_working_dir())
+    --         end),
+    --     }),
+    -- },
+    -- {
+    --     key = "l",
+    --     mods = mod.SUPER_REV,
+    --     action = wezterm.action.Multiple({
+    --         wezterm.action_callback(function(win, pane)
+    --             resurrect.fuzzy_load(win, pane, function(id, label)
+    --                 id = string.match(id, "([^/]+)$")
+    --                 id = string.match(id, "(.+)%..+$")
+    --                 local state = resurrect.load_state(id, "workspace")
+    --                 workspace_state.restore_workspace(state, {
+    --                     relative = true,
+    --                     restore_text = true,
+    --                     on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+    --                 })
+    --             end)
+    --         end),
+    --     }),
+    -- },
+    -- {
+    --     key = "s",
+    --     mods = mod.SUPER,
+    --     action = workspace_switcher.switch_workspace(),
+    -- },
+    { key = 'UpArrow',   mods = 'SHIFT', action = act.ScrollByLine(-1) },
+    { key = 'DownArrow', mods = 'SHIFT', action = act.ScrollByLine(1) },
+    { key = 'UpArrow',   mods = 'CMD', action = act.ScrollToTop },
+    { key = 'DownArrow', mods = 'CMD', action = act.ScrollToBottom },
 }
 
 -- loads the state whenever I create a new workspace
-wezterm.on("smart_workspace_switcher.workspace_switcher.created", function(window, path, label)
-  resurrect.workspace_state.restore_workspace(resurrect.load_state(label, "workspace"), {
-    window = window,
-    relative = true,
-    restore_text = true,
-    on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-  })
+wezterm.on('smart_workspace_switcher.workspace_switcher.created', function(window, path, label)
+   resurrect.workspace_state.restore_workspace(resurrect.load_state(label, 'workspace'), {
+      window = window,
+      relative = true,
+      restore_text = true,
+      on_pane_restore = resurrect.tab_state.default_on_pane_restore,
+   })
 end)
 
 -- Saves the state whenever I select a workspace
-wezterm.on("smart_workspace_switcher.workspace_switcher.selected", function(window, path, label)
-  resurrect.workspace_state.resurrect.save_state(workspace_state.get_workspace_state())
+wezterm.on('smart_workspace_switcher.workspace_switcher.selected', function(window, path, label)
+   resurrect.workspace_state.resurrect.save_state(workspace_state.get_workspace_state())
 end)
 
 -- stylua: ignore
@@ -245,18 +249,18 @@ local key_tables = {
 }
 
 local mouse_bindings = {
-    -- Ctrl-click will open the link under the mouse cursor
-    {
-        event = { Up = { streak = 1, button = 'Left' } },
-        mods = 'CTRL',
-        action = act.OpenLinkAtMouseCursor,
-    },
+   -- Ctrl-click will open the link under the mouse cursor
+   {
+      event = { Up = { streak = 1, button = 'Left' } },
+      mods = 'CTRL',
+      action = act.OpenLinkAtMouseCursor,
+   },
 }
 
 return {
-    disable_default_key_bindings = false,
-    leader = { key = 'Space', mods = mod.SUPER_REV },
-    keys = keys,
-    key_tables = key_tables,
-    mouse_bindings = mouse_bindings,
+   disable_default_key_bindings = false,
+   leader = { key = 'Space', mods = mod.SUPER_REV },
+   keys = keys,
+   key_tables = key_tables,
+   mouse_bindings = mouse_bindings,
 }

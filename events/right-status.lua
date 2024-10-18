@@ -4,7 +4,8 @@ local umath = require('utils.math')
 local nf = wezterm.nerdfonts
 local M = {}
 
-local SEPARATOR_CHAR = nf.oct_dash .. ' '
+local SEPARATOR_CHAR = ' '
+-- local SEPARATOR_CHAR = nf.oct_dash .. ' '
 
 local discharging_icons = {
    nf.md_battery_10,
@@ -61,7 +62,7 @@ local _push = function(text, icon, fg, bg, separate)
 end
 
 local _set_date = function()
-   local date = wezterm.strftime(' %a %H:%M:%S')
+   local date = wezterm.strftime(' %a %m-%d')
    _push(date, nf.fa_calendar, colors.date_fg, colors.date_bg, true)
 end
 
