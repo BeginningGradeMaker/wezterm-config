@@ -4,7 +4,7 @@ return {
    window_close_confirmation = 'AlwaysPrompt',
    exit_behavior = 'CloseOnCleanExit', -- if the shell program exited with a successful status
    status_update_interval = 1000,
-   window_decorations = "MACOS_FORCE_ENABLE_SHADOW",
+   window_decorations = "RESIZE",
 
    scrollback_lines = 5000,
 

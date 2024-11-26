@@ -3,13 +3,6 @@ local platform = require('utils.platform')()
 local backdrops = require('utils.backdrops')
 local act = wezterm.action
 
-local resurrect = wezterm.plugin.require('https://github.com/MLFlexer/resurrect.wezterm')
--- resurrect.init_directories()
-resurrect.periodic_save()
-local workspace_state = resurrect.workspace_state
-local workspace_switcher =
-   wezterm.plugin.require('https://github.com/MLFlexer/smart_workspace_switcher.wezterm')
-
 local mod = {}
 
 if platform.is_mac then
@@ -20,13 +13,21 @@ elseif platform.is_win or platform.is_linux then
    mod.SUPER_REV = 'ALT|CTRL'
 end
 
+local resurrect = wezterm.plugin.require('https://github.com/MLFlexer/resurrect.wezterm')
+resurrect.periodic_save()
+resurrect.set_max_nlines(1000)
+local workspace_state = resurrect.workspace_state
+local workspace_switcher =
+   wezterm.plugin.require('https://github.com/MLFlexer/smart_workspace_switcher.wezterm')
+
+
 -- stylua: ignore
 local keys = {
     -- misc/useful --
-    { key = 'F1', mods = 'NONE', action = 'ActivateCopyMode' },
-    { key = 'F2', mods = 'NONE', action = act.ActivateCommandPalette },
-    { key = 'F3', mods = 'NONE', action = act.ShowLauncher },
-    { key = 'F4', mods = 'NONE', action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS' }) },
+    { key = 'C', mods = mod.SUPER, action = 'ActivateCopyMode' },
+    { key = 'F2', mods = mod.SUPER, action = act.ActivateCommandPalette },
+    { key = 'L', mods = mod.SUPER, action = act.ShowLauncher },
+    { key = 'A', mods = mod.SUPER, action = act.ShowLauncherArgs({ flags = 'FUZZY|TABS|WORKSPACES' }) },
     {
         key = 'F5',
         mods = 'NONE',
@@ -116,12 +117,12 @@ local keys = {
     -- panes: split panes
     {
         key = [[\]],
-        mods = mod.SUPER,
+        mods = mod.SUPER_REV,
         action = act.SplitVertical({ domain = 'CurrentPaneDomain' }),
     },
     {
         key = [[\]],
-        mods = mod.SUPER_REV,
+        mods = mod.SUPER,
         action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }),
     },
 
@@ -178,36 +179,27 @@ local keys = {
     { key = 'm',         mods = 'CMD',   action = wezterm.action.HideApplication },
     -- {
     --     key = "s",
-    --     mods = mod.SUPER_REV,
+    --     mods = mod.SUPER,
     --     action = wezterm.action.Multiple({
     --         wezterm.action_callback(function(win, pane)
     --             resurrect.save_state(workspace_state.get_workspace_state(), pane.get_current_working_dir())
     --         end),
     --     }),
     -- },
-    -- {
-    --     key = "l",
-    --     mods = mod.SUPER_REV,
-    --     action = wezterm.action.Multiple({
-    --         wezterm.action_callback(function(win, pane)
-    --             resurrect.fuzzy_load(win, pane, function(id, label)
-    --                 id = string.match(id, "([^/]+)$")
-    --                 id = string.match(id, "(.+)%..+$")
-    --                 local state = resurrect.load_state(id, "workspace")
-    --                 workspace_state.restore_workspace(state, {
-    --                     relative = true,
-    --                     restore_text = true,
-    --                     on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-    --                 })
-    --             end)
-    --         end),
-    --     }),
-    -- },
-    -- {
-    --     key = "s",
-    --     mods = mod.SUPER,
-    --     action = workspace_switcher.switch_workspace(),
-    -- },
+    {
+        key = "s",
+        mods = mod.SUPER,
+        action = wezterm.action_callback(function(win, pane)
+            wezterm.log_info("Saved workspace")
+            resurrect.save_state(resurrect.workspace_state.get_workspace_state())
+        end),
+    },
+    { key = 'l', mods = mod.SUPER_REV, action = wezterm.action.ShowLauncher },
+    {
+        key = "S",
+        mods = mod.SUPER,
+        action = workspace_switcher.switch_workspace(),
+    },
     { key = 'UpArrow',   mods = 'SHIFT', action = act.ScrollByLine(-1) },
     { key = 'DownArrow', mods = 'SHIFT', action = act.ScrollByLine(1) },
     { key = 'UpArrow',   mods = 'CMD', action = act.ScrollToTop },
@@ -259,7 +251,7 @@ local mouse_bindings = {
 
 return {
    disable_default_key_bindings = false,
-   leader = { key = 'Space', mods = mod.SUPER_REV },
+   leader = { key = 'b', mods = mod.SUPER },
    keys = keys,
    key_tables = key_tables,
    mouse_bindings = mouse_bindings,
