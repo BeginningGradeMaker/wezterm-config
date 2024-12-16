@@ -131,6 +131,10 @@ local keys = {
     { key = 'w',     mods = mod.SUPER,     action = act.CloseCurrentPane({ confirm = false }) },
 
     -- panes: navigation
+    { key = 'k',     mods = "OPT", action = act.ActivatePaneDirection('Up') },
+    { key = 'j',     mods = "OPT", action = act.ActivatePaneDirection('Down') },
+    { key = 'h',     mods = "OPT", action = act.ActivatePaneDirection('Left') },
+    { key = 'l',     mods = "OPT", action = act.ActivatePaneDirection('Right') },
     { key = 'k',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Up') },
     { key = 'j',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Down') },
     { key = 'h',     mods = mod.SUPER_REV, action = act.ActivatePaneDirection('Left') },
@@ -194,7 +198,7 @@ local keys = {
             resurrect.save_state(resurrect.workspace_state.get_workspace_state())
         end),
     },
-    { key = 'l', mods = mod.SUPER_REV, action = wezterm.action.ShowLauncher },
+    -- { key = 'l', mods = mod.SUPER_REV, action = wezterm.action.ShowLauncher },
     {
         key = "S",
         mods = mod.SUPER,

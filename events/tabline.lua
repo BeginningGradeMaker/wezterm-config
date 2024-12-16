@@ -48,7 +48,7 @@ tabline.setup({
          'index',
          -- { 'parent', padding = 0 },
          -- '/',
-         { 'process', padding = { left = 0, right = 1 } },
+         { 'cwd', padding = { left = 0, right = 1 } },
          { 'zoomed', padding = 0 },
       },
       tab_inactive = { 'index', { 'cwd', padding = { left = 0, right = 1 } } },

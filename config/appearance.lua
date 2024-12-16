@@ -16,9 +16,6 @@ return {
 
    -- color scheme
    colors = colorscheme,
-   -- color_scheme = 'Tokyo Night Moon',
-   -- color_scheme = 'Catppuccin Mocha',
-   -- color_scheme = 'Catppuccin Frappe',
 
    -- background
    background = {
@@ -30,8 +27,8 @@ return {
          -- source = { Color =  },
          height = '100%',
          width = '100%',
-         opacity = 0.99,
-         -- opacity = 1,
+         -- opacity = 0.99,
+         opacity = 1,
       },
    },
 
@@ -54,13 +51,13 @@ return {
    window_padding = {
       left = 1,
       right = 0,
-      top = 12,
+      top = 0,
       bottom = 0,
    },
    -- window_close_confirmation = 'NeverPrompt',
    window_frame = {
       -- active_titlebar_bg = '#090909', -- Tokyonight
-      active_titlebar_bg = '#89b4fa', -- Catppuccin Mocha
+      active_titlebar_bg = '#89b4fa', -- Catppuccin Frappe
       font = fonts.font,
       font_size = fonts.font_size,
    },
