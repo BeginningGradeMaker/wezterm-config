@@ -2,9 +2,9 @@ local wezterm = require('wezterm')
 local gpu_adapters = require('utils.gpu_adapter')
 -- local colors = require('colors.custom')
 local fonts = require('config.fonts')
-local colorscheme = wezterm.color.get_builtin_schemes()['Catppuccin Frappe']
+local colorscheme = require("colors.theme")
 colorscheme.tab_bar.background = colorscheme.tab_bar.inactive_tab.bg_color
-colorscheme.tab_bar.new_tab = { bg_color = colorscheme.tab_bar.background, fg_color = '#949cbb' }
+-- colorscheme.tab_bar.new_tab = { bg_color = colorscheme.tab_bar.background, fg_color = '#949cbb' }
 
 return {
    animation_fps = 240,
@@ -24,10 +24,9 @@ return {
       -- },
       {
          source = { Color = colorscheme.background },
-         -- source = { Color =  },
          height = '100%',
          width = '100%',
-         -- opacity = 0.99,
+         -- opacity = 0.98,
          opacity = 1,
       },
    },
@@ -65,8 +64,8 @@ return {
       -- saturation = 0.9,
       -- brightness = 0.65,
    },
-   -- show_new_tab_button_in_tab_bar = true,
+   show_new_tab_button_in_tab_bar = false,
    tab_bar_at_bottom = false,
-   line_height = 1.1,
+   line_height = 1.2,
    default_workspace = 'zhisu',
 }

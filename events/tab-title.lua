@@ -12,7 +12,7 @@ local M = {}
 
 local __cells__ = {}
 
-local colorscheme = wezterm.color.get_builtin_schemes()["Catppuccin Frappe"]
+local colorscheme = require("colors.theme")
 -- colorscheme.tab_bar.background = '#1c1b19'
 
 local colors = {

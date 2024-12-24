@@ -2,47 +2,41 @@ local wezterm = require('wezterm')
 local grey = '#949cbb'
 
 local tabline = wezterm.plugin.require('https://github.com/michaelbrusegard/tabline.wez')
-local colorscheme = wezterm.color.get_builtin_schemes()['Catppuccin Frappe']
 tabline.setup({
    options = {
       icons_enabled = true,
-      theme = 'Catppuccin Frappe',
+      theme = Color,
+      -- Catppuccin
       color_overrides = {
          normal_mode = {
-            -- a = { fg = colorscheme.foreground, bg = colorscheme.background },
-            -- b = { fg = colorscheme.foreground, bg = colorscheme.background },
-            -- c = { fg = colorscheme.foreground, bg = colorscheme.background },
             x = { fg = grey },
          },
-         -- copy_mode = {
-         --    a = { fg = colorscheme.foreground, bg = colorscheme.background },
-         --    b = { fg = colorscheme.foreground, bg = colorscheme.background },
-         --    c = { fg = colorscheme.foreground, bg = colorscheme.background },
-         -- },
-         -- search_mode = {
-         --    a = { fg = colorscheme.foreground, bg = colorscheme.background },
-         --    b = { fg = colorscheme.foreground, bg = colorscheme.background },
-         --    c = { fg = colorscheme.foreground, bg = colorscheme.background },
-         -- },
-         -- -- Defining colors for a new key table
-         -- window_mode = {
-         --    a = { fg = colorscheme.foreground, bg = colorscheme.background },
-         --    b = { fg = colorscheme.foreground, bg = colorscheme.background },
-         --    c = { fg = colorscheme.foreground, bg = colorscheme.background },
-         -- },
          tab = {
-            -- active = { fg = '#8caaee', bg = colorscheme.background },
-            -- active = { fg = colorscheme.foreground, bg = colorscheme.background },
-            -- active = { bg = '#98c379', fg = colorscheme.tab_bar.background }, -- Catppuccin
-            inactive = { fg = '#949cbb' },
-            -- inactive_hover = { bg = colorscheme.background },
-            -- inactive_hover = { fg = colors.ansi[6], bg = colors.background },
+            inactive = { fg = grey },
          },
       },
+      -- Gruvbox Material
+      -- color_overrides = {
+      --    normal_mode = {
+      --       a = { fg = colorscheme.cursor_fg, bg = "#a89984" },
+      --       b = { fg = "#d4be98", bg = "#5a524c" },
+      --       c = { fg = colorscheme.foreground, bg = colorscheme.tab_bar.background },
+      --       x = { fg = colorscheme.foreground },
+      --    },
+      --    tab = {
+      --       -- active = { fg = '#8caaee', bg = colorscheme.background },
+      --       -- active = { fg = colorscheme.foreground, bg = colorscheme.background },
+      --       active = { bg = colorscheme.tab_bar.active_tab.bg_color, fg = colorscheme.tab_bar.active_tab.fg_color },
+      --       inactive = { bg = colorscheme.tab_bar.inactive_tab.bg_color, fg = colorscheme.tab_bar.inactive_tab.fg_color, },
+      --       inactive_hover = { bg = colorscheme.tab_bar.inactive_tab_hover.bg_color, fg = colorscheme.tab_bar.inactive_tab_hover.fg_color },
+      --       -- inactive_hover = { fg = colors.ansi[6], bg = colors.background },
+      --    },
+      -- },
    },
    sections = {
       tabline_a = { 'mode' },
-      tabline_b = { 'workspace' },
+      -- tabline_b = { 'workspace' },
+      tabline_b = {},
       tabline_c = { ' ' },
       tab_active = {
          'index',
@@ -52,9 +46,12 @@ tabline.setup({
          { 'zoomed', padding = 0 },
       },
       tab_inactive = { 'index', { 'cwd', padding = { left = 0, right = 1 } } },
-      tabline_x = { 'ram', 'cpu' },
-      tabline_y = { 'datetime' },
-      tabline_z = { 'battery' },
+      -- tabline_x = { 'ram', 'cpu' },
+      -- tabline_y = { 'datetime' },
+      -- tabline_z = { 'battery' },
+      tabline_x = {},
+      tabline_y = {},
+      tabline_z = {},
    },
    extensions = {},
 })
